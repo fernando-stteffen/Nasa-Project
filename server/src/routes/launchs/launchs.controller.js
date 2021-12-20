@@ -1,12 +1,13 @@
 const { 
   getAllLaunches,
   addNewLaunch, 
+  isLunchId,
+  abortLaunchById
 } = require('../../models/launchs.model')
 
 
 const httpAddNewLaunch = (req, res) => {
   const launch = req.body
-  console.log(req.body)
   const requiredParams = [
     'mission',
     'rocket',
@@ -37,7 +38,18 @@ const httpGetAllLaunches = (req, res) => {
   return res.status(200).json(getAllLaunches())
 }
 
+const httpAbortLaunch = (req, res) => {
+  const launchId = req.params.id;
+  
+  if (!isLunchId(launchId)) {
+    return res.status(404).json({ error: `Launch number not founded! `})
+  }
+  const aborted = abortLaunchById(launchId)
+  return res.status(200).json({aborted})
+}
+
 module.exports = {
   httpGetAllLaunches,
-  httpAddNewLaunch
+  httpAddNewLaunch,
+  httpAbortLaunch
 }

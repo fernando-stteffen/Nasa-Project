@@ -32,7 +32,20 @@ const addNewLaunch = (launch) => {
   )
 }
 
+const isLunchId = (id) => {
+  return launches.has(Number(id))
+}
+
+const abortLaunchById = (id) => {
+  const aborted = launches.get(Number(id))
+  aborted.upcoming = false
+  aborted.success = false
+  return aborted
+}
+
 module.exports = {
   getAllLaunches,
-  addNewLaunch
+  addNewLaunch,
+  isLunchId,
+  abortLaunchById
 }
