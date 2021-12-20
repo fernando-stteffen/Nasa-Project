@@ -5,9 +5,9 @@ let latestFlightNumber = 100
 const launch = {
   flightNumber: 100,
   mission: 'FSXNA mars recycle',
-  rocket: 'FSXNA M01',
+  rocket: 'FSXNA M011',
   launchDate: new Date('december 26, 2030'),
-  destination: 'Kepler-442 b',
+  target: 'Kepler-442 b',
   customer: ['FStteffen','Space-X','NASA'],
   upcoming: true,
   success: true,
