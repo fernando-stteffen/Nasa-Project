@@ -6,7 +6,7 @@ const {
 } = require('../../models/launchs.model')
 
 
-const httpAddNewLaunch = (req, res) => {
+const httpAddNewLaunch = async (req, res) => {
   const launch = req.body
   const requiredParams = [
     'mission',
@@ -30,21 +30,21 @@ const httpAddNewLaunch = (req, res) => {
     })
   }
   
-  addNewLaunch(launch)
+  await addNewLaunch(launch)
   return res.status(201).json(launch)
 }
 
-const httpGetAllLaunches = (req, res) => {
-  return res.status(200).json(getAllLaunches())
+const httpGetAllLaunches = async (req, res) => {
+  return  res.status(200).json( await getAllLaunches())
 }
 
-const httpAbortLaunch = (req, res) => {
+const httpAbortLaunch = async (req, res) => {
   const launchId = req.params.id;
-  
-  if (!isLunchId(launchId)) {
+  const existsLaunch = await isLunchId(launchId)
+  if (!existsLaunch) {
     return res.status(404).json({ error: `Launch number not founded! `})
   }
-  const aborted = abortLaunchById(launchId)
+  const aborted = await abortLaunchById(launchId)
   return res.status(200).json({aborted})
 }
 
