@@ -45,7 +45,7 @@ const addNewLaunch = async (launch) => {
   const newLaunch = Object.assign(launch, {
       upcoming: true,
       success: true,
-      customer: ['FStteffen','Space-X','NASA'],
+      customers: ['FStteffen','Space-X','NASA'],
       flightNumber: newFlightNumber
   })
   saveLaunch(newLaunch)
@@ -59,12 +59,14 @@ const isLunchId = async (launchId) => {
 }
 
 const abortLaunchById = async (launchId) => {
-  return await launchesDatabase.updateOne({
+  const aborted = await launchesDatabase.updateOne({
     flightNumber: launchId
   }, {
     upcoming: false,
     success: false
   })
+
+  return aborted.modifiedCount === 1;
 }
 
 
@@ -74,7 +76,7 @@ const launch = {
   rocket: 'FSXNA M011',
   launchDate: new Date('december 26, 2030'),
   target: 'Kepler-442 b', //Kepler-442 b
-  customer: ['FStteffen','Space-X','NASA'],
+  customers: ['FStteffen','Space-X','NASA'],
   upcoming: true,
   success: true,
 }

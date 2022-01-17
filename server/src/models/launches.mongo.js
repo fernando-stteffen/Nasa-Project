@@ -30,7 +30,7 @@ const launchesSchema = new mongoose.Schema({
     required: true, 
     default: true 
   },
-  customer: [ String ],
+  customers: [ String ],
 })
 
 //Connect Schema with the "lauchs" collection
