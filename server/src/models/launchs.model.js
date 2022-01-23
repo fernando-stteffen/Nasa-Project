@@ -7,6 +7,7 @@ const DEFAULT_FLIGHT_NUMBER = 100
 const getAllLaunches = async (skip, limit) => {
   return await launchesDatabase
     .find({}, { '_id': 0, '__v': 0 })
+    .sort({ flightNumber: 1 })
     .skip(skip)
     .limit(limit)
 }
@@ -65,20 +66,6 @@ const abortLaunchById = async (launchId) => {
 
   return aborted.modifiedCount === 1;
 }
-
-
-const launch = {
-  flightNumber: 100, //flight_number
-  mission: 'FSXNA mars recycle', //name
-  rocket: 'FSXNA M011', //rocket.name
-  launchDate: new Date('december 26, 2030'), //date_local
-  target: 'Kepler-442 b', //Kepler-442 b
-  customers: ['FStteffen', 'Space-X', 'NASA'], //customers.payload for each payload
-  upcoming: true, //upcoming
-  success: true, //success
-}
-
-saveLaunch(launch)
 
 const SPACEX_API_URL = "https://api.spacexdata.com/v4/launches/query"
 

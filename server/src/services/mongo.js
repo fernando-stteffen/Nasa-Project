@@ -1,7 +1,6 @@
 const mongoose = require('mongoose')
 
-const { DATABASE_PASSW_CLUSTER } = require('../configs/database')
-const MONGO_URL = `mongodb+srv://nasa-api:${DATABASE_PASSW_CLUSTER}/nasa?retryWrites=true&w=majority`
+const MONGO_URL = process.env.MONGO_URL
 
 mongoose.connection.on('open', () => {
   console.log('MongoDB connection ready!')

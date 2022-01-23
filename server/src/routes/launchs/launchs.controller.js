@@ -40,9 +40,6 @@ const httpAddNewLaunch = async (req, res) => {
 
 const httpGetAllLaunches = async (req, res) => {
   const { skip, limit } = getPagination(req.query)
-  console.log(getPagination(req.query))
-  console.log(skip)
-  console.log(limit)
   return res.status(200).json(await getAllLaunches(skip, limit))
 }
 
